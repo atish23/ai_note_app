@@ -1,0 +1,55 @@
+# API Key cache file - contains sensitive information
+.api_key_cache
+
+# Database files
+notes.db
+*.db
+
+# FAISS index files
+faiss.index
+*.index
+
+# Configuration with sensitive data
+llm_config.json
+
+# Logs
+*.log
+logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environment
+venv/
+venv_*/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Test files
+test_*.py
+debug_*.py
+
+# Backup files
+*_old.*
+*_backup.*
+*_clean.*
+*_minimal.*

@@ -1,0 +1,18 @@
+# Unified Requirements for AI Notes/Task Manager
+# Supports both Streamlit app and MCP server
+
+# Core MCP dependencies
+mcp
+
+# Web interface
+streamlit
+
+# AI and ML dependencies
+google-generativeai
+faiss-cpu
+numpy
+
+# HTTP requests (for Ollama)
+requests
+
+# Note: sqlite3, pathlib, asyncio, json, time, typing are built into Python
