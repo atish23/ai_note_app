@@ -179,6 +179,19 @@ class DatabaseService:
         finally:
             conn.close()
     
+    def update_item_content(self, item_id: int, raw_content: str, enhanced_content: str) -> bool:
+        """Update the content of an item"""
+        conn = sqlite3.connect(self.db_path)
+        try:
+            cursor = conn.execute(
+                "UPDATE notes SET raw = ?, enhanced = ? WHERE id = ?",
+                (raw_content, enhanced_content, item_id)
+            )
+            conn.commit()
+            return cursor.rowcount > 0
+        finally:
+            conn.close()
+    
     def delete_item(self, item_id: int) -> bool:
         """Delete an item by ID"""
         conn = sqlite3.connect(self.db_path)

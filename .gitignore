@@ -12,6 +12,19 @@ faiss.index
 # Configuration with sensitive data
 llm_config.json
 
+# Google Drive credentials and tokens (SENSITIVE - DO NOT COMMIT)
+google_drive_credentials.json
+google_drive_token.json
+*.credentials.json
+*.token.json
+
+# Backup files and directories (may contain sensitive data)
+backups/
+*.backup
+*.zip
+ai_notes_backup_*
+ai_notes_export_*
+
 # Logs
 *.log
 logs/

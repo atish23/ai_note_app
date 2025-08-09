@@ -162,6 +162,46 @@ class NotesAgentService:
                 message=f"Error deleting item: {str(e)}"
             )
     
+    def update_item_content(self, item_id: int, new_content: str) -> AgentResponse:
+        """Update the content of an item"""
+        try:
+            # Get the existing item
+            item = self.db_service.get_item(item_id)
+            if not item:
+                return AgentResponse(
+                    success=False,
+                    message=f"Item {item_id} not found"
+                )
+            
+            # Enhance the new content with AI
+            enhanced = self.ai_service.enhance_text(new_content, item.item_type)
+            
+            # Check if the database service has the update_item_content method
+            if hasattr(self.db_service, 'update_item_content'):
+                # Update the item in database
+                success = self.db_service.update_item_content(item_id, new_content, enhanced)
+            else:
+                # Fallback: use the existing update_item method
+                item.raw_content = new_content
+                item.enhanced_content = enhanced
+                success = self.db_service.update_item(item)
+            
+            if success:
+                return AgentResponse(
+                    success=True,
+                    message=f"Item {item_id} updated successfully"
+                )
+            else:
+                return AgentResponse(
+                    success=False,
+                    message=f"Failed to update item {item_id}"
+                )
+        except Exception as e:
+            return AgentResponse(
+                success=False,
+                message=f"Error updating item: {str(e)}"
+            )
+    
     def get_filtered_items(self, item_type: Optional[ItemType] = None, 
                           pending_only: bool = False, 
                           completed_only: bool = False) -> List[NoteItem]:
@@ -289,11 +329,16 @@ class NotesAgentService:
         if is_resource:
             return ItemType.RESOURCE
         
-        # Task indicators
+        # Task indicators - more comprehensive list
         task_indicators = [
             'need to', 'have to', 'should', 'must', 'todo', 'task', 'complete', 'finish',
             'deadline', 'due', 'by', 'before', 'schedule', 'meeting', 'call', 'review',
-            'prepare', 'create', 'build', 'fix', 'update', 'send', 'contact', 'follow up'
+            'prepare', 'create', 'build', 'fix', 'update', 'send', 'contact', 'follow up',
+            'buy', 'get', 'find', 'check', 'look', 'read', 'write', 'email', 'message',
+            'visit', 'go to', 'attend', 'join', 'start', 'begin', 'work on', 'study',
+            'learn', 'practice', 'exercise', 'clean', 'organize', 'sort', 'arrange',
+            'plan', 'decide', 'choose', 'pick', 'select', 'order', 'book', 'reserve',
+            'confirm', 'verify', 'test', 'try', 'experiment', 'research', 'investigate'
         ]
         
         is_task = any(indicator in content_lower for indicator in task_indicators)

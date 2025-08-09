@@ -15,4 +15,14 @@ numpy
 # HTTP requests (for Ollama)
 requests
 
+# Native macOS app dependencies
+PyQt6
+PyQt6-WebEngine
+
+# Google Drive API dependencies
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+
 # Note: sqlite3, pathlib, asyncio, json, time, typing are built into Python
