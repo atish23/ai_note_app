@@ -12,6 +12,18 @@ A powerful AI-enhanced note-taking and task management application with local st
 - 🔒 **Local Storage**: All data stored locally with SQLite
 - 🤖 **AI Integration**: Support for multiple AI providers (Ollama, OpenAI)
 
+## 🎬 Demo
+
+<p align="center">
+  <a href="https://www.awesomescreenshot.com/video/42958183?key=767c346ee55236fa610adab03568dda7">
+    <img src="https://www.awesomescreenshot.com/image/42958183?key=767c346ee55236fa610adab03568dda7" alt="AI Notes Demo Video" width="800">
+  </a>
+  <br>
+  <em>👆 Click to play the demo video</em>
+</p>
+
+**🎥 Watch the full demo**: [AI Notes & Task Manager Demo](https://www.awesomescreenshot.com/video/42958183?key=767c346ee55236fa610adab03568dda7)
+
 ## 🚀 Quick Start
 
 ### Option 1: Web Application (Recommended)
