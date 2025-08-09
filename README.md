@@ -65,9 +65,20 @@ cd AI_Note_App
 Edit `llm_config.json`:
 ```json
 {
-  "provider": "ollama",
-  "ollama_model": "llama3.1",
-  "gemini_api_key": "your-gemini-api-key-here"
+  "llm_provider": "ollama",
+  "providers": {
+    "gemini": {
+      "model_text": "gemini-1.5-flash",
+      "model_embedding": "embedding-001",
+      "api_key_required": true
+    },
+    "ollama": {
+      "model_text": "llama3.1:8b", 
+      "model_embedding": "nomic-embed-text",
+      "base_url": "http://localhost:11434",
+      "api_key_required": false
+    }
+  }
 }
 ```
 
@@ -114,27 +125,25 @@ python setup_google_drive.py
 brew install ollama
 
 # Pull a model
-ollama pull llama3.1
+ollama pull llama3.1:8b
 
-# Update config
+# Update config - set llm_provider to "ollama"
 {
-  "provider": "ollama",
-  "ollama_model": "llama3.1"
+  "llm_provider": "ollama"
 }
 ```
 
 #### Google Gemini (Cloud AI)
 ```json
 {
-  "provider": "gemini",
-  "gemini_api_key": "your-gemini-api-key-here"
+  "llm_provider": "gemini"
 }
 ```
 
 **Get Gemini API Key:**
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Create a new API key
-3. Add it to your `llm_config.json`
+3. Set up environment variable or add it to the application
 
 ### Google Drive Backup
 1. Run: `python setup_google_drive.py`
