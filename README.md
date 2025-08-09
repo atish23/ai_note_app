@@ -36,7 +36,7 @@ A powerful AI-enhanced note-taking and task management application with local st
 1. **Setup and Run**:
    ```bash
    cd AI_Note_App
-   ./run_macos.sh setup    # First time only
+   ./run.sh setup          # First time only (same as web)
    ./run_macos.sh macos    # Start macOS app
    ```
 
@@ -52,20 +52,11 @@ A powerful AI-enhanced note-taking and task management application with local st
 
 ## 🔧 Installation & Setup
 
-### 1. Initial Setup
-```bash
-# Clone or download the project
-cd AI_Note_App
-
-# Run setup (creates virtual environment and installs dependencies)
-./run.sh setup
-```
-
-### 2. Configure AI Provider (Optional)
-Edit `llm_config.json`:
+### Configure AI Provider (Optional)
+Edit `llm_config.json` to change the active provider:
 ```json
 {
-  "llm_provider": "ollama",
+  "llm_provider": "ollama",  // Change to "gemini" for Google Gemini
   "providers": {
     "gemini": {
       "model_text": "gemini-1.5-flash",
@@ -82,11 +73,13 @@ Edit `llm_config.json`:
 }
 ```
 
-### 3. Google Drive Backup (Optional)
+### Google Drive Backup (Optional)
 ```bash
 # Follow the setup guide
 python setup_google_drive.py
 ```
+
+For detailed Google Drive setup instructions, see [`GOOGLE_DRIVE_SETUP.md`](GOOGLE_DRIVE_SETUP.md).
 
 ## 🎮 Usage Commands
 
@@ -114,6 +107,12 @@ python setup_google_drive.py
 - **Type**: Native macOS application
 - **Features**: System integration, dock icon, notifications
 - **Best for**: Native macOS experience
+
+### MCP Server (Model Context Protocol)
+- **Type**: Server interface for AI integration
+- **Features**: Allows external tools to interact with your notes
+- **Best for**: Integration with other AI tools and workflows
+- **Usage**: Run `python mcp_server.py` to start the MCP server
 
 ## ⚙️ Configuration
 
@@ -143,12 +142,14 @@ ollama pull llama3.1:8b
 **Get Gemini API Key:**
 1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Create a new API key
-3. Set up environment variable or add it to the application
+3. Set up environment variable: `export GEMINI_API_KEY="your-key-here"`
 
 ### Google Drive Backup
 1. Run: `python setup_google_drive.py`
 2. Follow the authentication flow
 3. Automatic backups will be enabled
+
+For detailed setup instructions, see [`GOOGLE_DRIVE_SETUP.md`](GOOGLE_DRIVE_SETUP.md).
 
 ## 📁 Project Structure
 
@@ -156,19 +157,30 @@ ollama pull llama3.1:8b
 AI_Note_App/
 ├── ai_note_app.py              # Main Streamlit app
 ├── macos_app.py                # Native macOS app
-├── run_macos.sh                # Main launcher script
+├── mcp_server.py               # Model Context Protocol server
+├── run.sh                      # Web app launcher script  
+├── run_macos.sh                # macOS app launcher script
+├── build_app.sh                # App building script
 ├── launch_ai_notes.command     # Desktop launcher
+├── AI_Notes_Launcher.applescript # AppleScript launcher
+├── backup_ai_notes.command     # Manual backup script
+├── requirements.txt            # Python dependencies
+├── llm_config.json            # AI configuration
+├── GOOGLE_DRIVE_SETUP.md      # Detailed Google Drive setup guide
 ├── core/                       # Core services
 │   ├── agent_service.py        # AI agent logic
 │   ├── ai_service.py           # AI provider interface
 │   ├── database_service.py     # SQLite operations
 │   ├── backup_service.py       # Google Drive backup
-│   └── search_service.py       # FAISS vector search
+│   ├── search_service.py       # FAISS vector search
+│   └── models.py               # Data models
 ├── backup_manager.py           # Backup utilities
 ├── setup_google_drive.py       # Google Drive setup
+├── demo/                       # Demo files
+├── backups/                    # Backup storage
 ├── notes.db                    # SQLite database
 ├── faiss.index                 # Search index
-└── llm_config.json            # AI configuration
+└── google_drive_credentials_template.json # Template for credentials
 ```
 
 ## 🔍 Troubleshooting
@@ -191,7 +203,8 @@ AI_Note_App/
 # Check Ollama
 ollama list
 
-# Or verify Gemini API key in llm_config.json
+# Or verify Gemini API key environment variable
+echo $GEMINI_API_KEY
 ```
 
 **Google Drive issues**:
@@ -208,7 +221,7 @@ python setup_google_drive.py
 
 1. **Check logs**: Terminal output shows detailed error messages
 2. **Reset database**: Delete `notes.db` if corrupted
-3. **Reinstall**: Delete `venv_mcp/` and run `./run_macos.sh setup`
+3. **Reinstall**: Delete `venv_mcp/` and run `./run.sh setup`
 4. **Backup first**: Always backup data before troubleshooting
 
 ## � License
