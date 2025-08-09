@@ -1,0 +1,21 @@
+{
+  "llm_provider": "ollama",
+  "providers": {
+    "gemini": {
+      "model_text": "gemini-1.5-flash",
+      "model_embedding": "embedding-001",
+      "api_key_required": true
+    },
+    "openai": {
+      "model_text": "gpt-3.5-turbo",
+      "model_embedding": "text-embedding-ada-002",
+      "api_key_required": true
+    },
+    "ollama": {
+      "model_text": "llama3.1:8b",
+      "model_embedding": "nomic-embed-text",
+      "base_url": "http://localhost:11434",
+      "api_key_required": false
+    }
+  }
+}

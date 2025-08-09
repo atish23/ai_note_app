@@ -10,7 +10,7 @@ A powerful AI-enhanced note-taking and task management application with local st
 - ☁️ **Google Drive Backup**: Automatic cloud synchronization
 - 🖥️ **Multiple Interfaces**: Web app and native macOS app
 - 🔒 **Local Storage**: All data stored locally with SQLite
-- 🤖 **AI Integration**: Support for multiple AI providers (Ollama, OpenAI)
+- 🤖 **AI Integration**: Support for multiple AI providers (Ollama, Google Gemini)
 
 ## 🎬 Demo
 
@@ -24,9 +24,9 @@ A powerful AI-enhanced note-taking and task management application with local st
 
 1. **Setup and Run**:
    ```bash
-   cd /Users/amaske/Documents/AI_Note_App
-   ./run_macos.sh setup    # First time only
-   ./run_macos.sh web      # Start web app
+   cd AI_Note_App
+   ./run.sh setup       # First time only
+   ./run.sh streamlit   # Start web app
    ```
 
 2. **Access**: Open http://localhost:8501 in your browser
@@ -35,9 +35,9 @@ A powerful AI-enhanced note-taking and task management application with local st
 
 1. **Setup and Run**:
    ```bash
-   cd /Users/amaske/Documents/AI_Note_App
+   cd AI_Note_App
    ./run_macos.sh setup    # First time only
-   ./run_macos.sh app      # Start macOS app
+   ./run_macos.sh macos    # Start macOS app
    ```
 
 2. **Desktop Launcher** (Optional):
@@ -55,10 +55,10 @@ A powerful AI-enhanced note-taking and task management application with local st
 ### 1. Initial Setup
 ```bash
 # Clone or download the project
-cd /Users/amaske/Documents/AI_Note_App
+cd AI_Note_App
 
 # Run setup (creates virtual environment and installs dependencies)
-./run_macos.sh setup
+./run.sh setup
 ```
 
 ### 2. Configure AI Provider (Optional)
@@ -67,14 +67,14 @@ Edit `llm_config.json`:
 {
   "provider": "ollama",
   "ollama_model": "llama3.1",
-  "openai_api_key": "your-api-key-here"
+  "gemini_api_key": "your-gemini-api-key-here"
 }
 ```
 
 ### 3. Google Drive Backup (Optional)
 ```bash
 # Follow the setup guide
-./run_macos.sh google-setup
+python setup_google_drive.py
 ```
 
 ## 🎮 Usage Commands
@@ -82,25 +82,14 @@ Edit `llm_config.json`:
 ### Main Commands
 ```bash
 # Web Application
-./run_macos.sh web          # Start web interface
-./run_macos.sh web --port 8502  # Custom port
+./run.sh streamlit         # Start web interface
 
 # macOS Native App
-./run_macos.sh app          # Start native app
+./run_macos.sh macos       # Start native app
 
 # Setup & Maintenance
-./run_macos.sh setup        # Initial setup
-./run_macos.sh update       # Update dependencies
-./run_macos.sh google-setup # Configure Google Drive
-```
-
-### Backup & Restore
-```bash
-# Manual backup
-./backup_ai_notes.command
-
-# Restore from backup
-python backup_manager.py --restore backup_20240101_120000.zip
+./run.sh setup             # Initial setup
+./run.sh setup-ollama      # Setup Ollama models
 ```
 
 ## 🖥️ Interface Options
@@ -134,16 +123,21 @@ ollama pull llama3.1
 }
 ```
 
-#### OpenAI (Cloud AI)
+#### Google Gemini (Cloud AI)
 ```json
 {
-  "provider": "openai",
-  "openai_api_key": "sk-your-api-key-here"
+  "provider": "gemini",
+  "gemini_api_key": "your-gemini-api-key-here"
 }
 ```
 
+**Get Gemini API Key:**
+1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. Create a new API key
+3. Add it to your `llm_config.json`
+
 ### Google Drive Backup
-1. Run: `./run_macos.sh google-setup`
+1. Run: `python setup_google_drive.py`
 2. Follow the authentication flow
 3. Automatic backups will be enabled
 
@@ -174,12 +168,13 @@ AI_Note_App/
 
 **Virtual environment not found**:
 ```bash
-./run_macos.sh setup
+./run.sh setup
 ```
 
 **Port already in use**:
 ```bash
-./run_macos.sh web --port 8502
+# Stop any running Streamlit processes and restart
+./run.sh streamlit
 ```
 
 **AI not working**:
@@ -187,12 +182,12 @@ AI_Note_App/
 # Check Ollama
 ollama list
 
-# Or verify OpenAI key in llm_config.json
+# Or verify Gemini API key in llm_config.json
 ```
 
 **Google Drive issues**:
 ```bash
-./run_macos.sh google-setup
+python setup_google_drive.py
 ```
 
 ### Logs & Debugging
@@ -214,7 +209,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 **Quick Start Summary**:
-1. `cd /Users/amaske/Documents/AI_Note_App`
-2. `./run_macos.sh setup` (first time)
-3. `./run_macos.sh web` (web) or `./run_macos.sh app` (macOS)
+1. `cd AI_Note_App`
+2. `./run.sh setup` (first time)
+3. `./run.sh streamlit` (web) or `./run_macos.sh macos` (macOS)
 4. Open http://localhost:8501 (web) or use the native app window

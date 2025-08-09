@@ -10,7 +10,7 @@ faiss.index
 *.index
 
 # Configuration with sensitive data
-llm_config.json
+# llm_config.json
 
 # Google Drive credentials and tokens (SENSITIVE - DO NOT COMMIT)
 google_drive_credentials.json
