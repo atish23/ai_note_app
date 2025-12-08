@@ -6,7 +6,6 @@ datePublished: Sun Dec 07 2025 11:13:56 GMT+0000 (Coordinated Universal Time)
 cuid: cmivmk6li000302ibdw4m8mjz
 slug: inside-the-engine-how-nosql-optimizes-for-massive-writes
 cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1765105787590/94f27ad8-4c4f-4e26-ac9a-968071a80d38.png
-tags: nosql, database, performance-optimization, architecture-design
 
 ---
 
